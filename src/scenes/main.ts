@@ -1,18 +1,24 @@
 import { AssetType } from "../interface/assets";
-import { Ship } from "../interface/ship";
 import { Bullet } from "../interface/bullet";
-import { AlienManager } from "../interface/alien-manager";
+import { AssetFactory } from "../interface/factory/asset-factory";
+import { AlienManager } from "../interface/manager/alien-manager";
+import { Ship } from "../interface/ship";
+import { AnimationFactory } from "../interface/factory/animation-factory";
 
 export class MainScene extends Phaser.Scene {
+    assetFactory: AssetFactory;
+    animationFactory: AnimationFactory;
     bulletTime = 0;
     player: Phaser.GameObjects.Sprite;
     bullets: Phaser.Physics.Arcade.Group;
+    enemyBullets: Phaser.Physics.Arcade.Group;
     alienManager: AlienManager;
 
     constructor() {
         super({
             key: "MainScene"
         });
+
     }
 
     preload() {
@@ -20,7 +26,7 @@ export class MainScene extends Phaser.Scene {
         this.load.image(AssetType.Starfield, "/images/starfield.png");
         this.load.image(AssetType.Bullet, "/images/bullet.png");
         this.load.image(AssetType.EnemyBullet, "/images/enemy-bullet.png");
-        this.load.spritesheet(AssetType.Alien, "/images/invader32x32x4.png", {
+        this.load.spritesheet(AssetType.Alien, "/images/invader.png", {
             frameWidth: 32,
             frameHeight: 32
         });
@@ -32,14 +38,13 @@ export class MainScene extends Phaser.Scene {
     }
 
     create() {
+        this.assetFactory = new AssetFactory(this);
+        this.animationFactory = new AnimationFactory(this);
         this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.player = Ship.create(this);
-        this.bullets = this.physics.add.group({
-            maxSize: 30,
-            classType: Bullet,
-            runChildUpdate: true
-        });
-        this.alienManager = new AlienManager(this)
+        this.bullets = this.assetFactory.createBullets();
+        this.enemyBullets = this.assetFactory.createEnemyBullets();
+        this.alienManager = new AlienManager(this);
     }
 
     private _fireBullet() {

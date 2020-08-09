@@ -1,6 +1,5 @@
-import { Alien } from "./alien";
-import { AnimationType } from "./animation";
-import { AssetType } from "./assets";
+import { Alien } from "../alien";
+import { AnimationType } from "../factory/animation-factory";
 
 export class AlienManager {
     aliens: Phaser.Physics.Arcade.Group;
@@ -9,15 +8,6 @@ export class AlienManager {
             maxSize: 40,
             classType: Alien,
             runChildUpdate: true,
-        });
-        this._scene.anims.create({
-            key: AnimationType.Fly,
-            frames: this._scene.anims.generateFrameNumbers(AssetType.Alien, {
-                start: 0,
-                end: 3
-            }),
-            frameRate: 20,
-            repeat: -1
         });
         this._sortAliens();
     }
@@ -33,6 +23,21 @@ export class AlienManager {
                 alien.setImmovable(false);
             }
         }
+        let tween = this._scene.tweens.add({
+            targets: this.aliens,
+            props: {
+                x: 200
+            },
+            duration: 2000,
+            ease: "Linear",
+            paused: false,
+            delay: 0,
+            repeat: 1000,
+            yoyo: true,
+            onLoop: () => {
 
+            }
+        });
+        tween.play()
     }
 }
