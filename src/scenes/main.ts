@@ -1,4 +1,4 @@
-import { AssetType } from "../interface/assets";
+import { AssetType, SoundType } from "../interface/assets";
 import { Bullet } from "../interface/bullet";
 import { AssetManager } from "../interface/manager/asset-manager";
 import { AlienManager } from "../interface/manager/alien-manager";
@@ -46,6 +46,11 @@ export class MainScene extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128,
         });
+
+        this.sound.volume = 0.5;
+        this.load.audio(SoundType.Shoot, "/audio/shoot.wav");
+        this.load.audio(SoundType.Kaboom, "/audio/explosion.wav");
+        this.load.audio(SoundType.InvaderKilled, "/audio/invaderkilled.wav");
     }
 
     create() {
@@ -132,6 +137,7 @@ export class MainScene extends Phaser.Scene {
 
         explosion.setPosition(this.player.x, this.player.y);
         explosion.play(AnimationType.Kaboom);
+        this.sound.play(SoundType.Kaboom)
         if (this.scoreManager.noMoreLives) {
             this.scoreManager.setGameOverText();
             this.assetManager.gameOver();
