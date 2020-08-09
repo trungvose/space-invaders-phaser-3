@@ -7,10 +7,12 @@ import { AnimationFactory, AnimationType } from "../interface/factory/animation-
 import { Alien } from "../interface/alien";
 import { Kaboom } from "../interface/kaboom";
 import { EnemyBullet } from "../interface/enemy-bullet";
+import { ScoreManager } from "../interface/manager/score-manager";
 
 export class MainScene extends Phaser.Scene {
     assetManager: AssetManager;
     animationFactory: AnimationFactory;
+    scoreManager: ScoreManager;
     bulletTime = 0;
     firingTimer = 0;
     starfield: Phaser.GameObjects.TileSprite;
@@ -42,18 +44,25 @@ export class MainScene extends Phaser.Scene {
     }
 
     create() {
+        this.starfield = this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.assetManager = new AssetManager(this);
         this.animationFactory = new AnimationFactory(this);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.fireKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.starfield = this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.player = Ship.create(this);
         this.alienManager = new AlienManager(this);
+        this.scoreManager = new ScoreManager(this);
     }
 
     update() {
         this.starfield.tilePositionY -= 1;
         this._shipKeyboardHandler();
+        if (this.time.now > this.firingTimer) {
+            this._enemyFires()
+        }
+
+        this.physics.overlap(this.assetManager.bullets, this.alienManager.aliens, this._bulletHitAliens, null, this);
+        this.physics.overlap(this.assetManager.enemyBullets, this.player, this._enemyBulletHitPlayer, null, this);
     }
 
     private _shipKeyboardHandler() {
@@ -69,19 +78,16 @@ export class MainScene extends Phaser.Scene {
         if (this.fireKey.isDown) {
             this._fireBullet();
         }
-
-        if (this.time.now > this.firingTimer) {
-            this._enemyFires()
-        }
-
-        this.physics.overlap(this.assetManager.bullets, this.alienManager.aliens, this._bulletHitAliens, null, this);
-        this.physics.overlap(this.assetManager.enemyBullets, this.player, this._enemyBulletHitPlayer, null, this);
     }
 
     private _bulletHitAliens(bullet: Bullet, alien: Alien) {
         let explosion: Kaboom = this.assetManager.explosions.get();
         bullet.kill();
         alien.kill(explosion);
+        this.scoreManager.increaseScore();
+        if(!this.alienManager.hasAliveAliens){
+            this.scoreManager.increaseScore(1000);
+        }
     }
 
     private _enemyBulletHitPlayer(ship, enemyBullet: EnemyBullet) {
@@ -93,9 +99,9 @@ export class MainScene extends Phaser.Scene {
 
     private _enemyFires() {
         let enemyBullet: EnemyBullet = this.assetManager.enemyBullets.get();
-        if (enemyBullet && this.alienManager.hasAliveAliens) {
-            let randomEnemy = this.alienManager.getRandomAliveEnemy();
-            enemyBullet.setPosition(randomEnemy.x, randomEnemy.y);        
+        let randomEnemy = this.alienManager.getRandomAliveEnemy();
+        if (enemyBullet && randomEnemy) {
+            enemyBullet.setPosition(randomEnemy.x, randomEnemy.y);
             this.physics.moveToObject(enemyBullet, this.player, 120);
             this.firingTimer = this.time.now + 2000;
         }

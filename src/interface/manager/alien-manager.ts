@@ -11,7 +11,7 @@ export class AlienManager {
         this.aliens = this._scene.physics.add.group({
             maxSize: 40,
             classType: Alien,
-            runChildUpdate: true,
+            runChildUpdate: true
         });
         this._sortAliens();
     }
@@ -22,9 +22,9 @@ export class AlienManager {
         return aliens[random];
     }
 
-    _sortAliens() {
+    private _sortAliens() {
         let ORIGIN_X = 100;
-        let ORIGIN_Y = 50;
+        let ORIGIN_Y = 100;
         for (let y = 0; y < 4; y++) {
             for (let x = 0; x < 10; x++) {
                 let alien: Alien = this.aliens.create(ORIGIN_X + x * 48, ORIGIN_Y + y * 50);
