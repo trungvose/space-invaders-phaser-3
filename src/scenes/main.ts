@@ -75,9 +75,7 @@ export class MainScene extends Phaser.Scene {
         if (this.time.now > this.bulletTime) {
             let bullet: Bullet = this.bullets.get();
             if (bullet) {
-                bullet.setX(this.player.x);
-                bullet.setY(this.player.y);
-                bullet.setVelocityY(-400);
+                bullet.shoot(this.player.x, this.player.y)
                 this.bulletTime = this.time.now + 200;
             }
         }
