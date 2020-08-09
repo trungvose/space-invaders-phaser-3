@@ -1,7 +1,8 @@
 import { AssetType } from "../assets";
 
 export enum AnimationType {
-    Fly = "fly"
+    Fly = "fly",
+    Kaboom = "kaboom"
 }
 
 export class AnimationFactory {
@@ -19,5 +20,15 @@ export class AnimationFactory {
             frameRate: 20,
             repeat: -1
         });
+
+        this._scene.anims.create({
+            key: AnimationType.Kaboom,
+            frames: this._scene.anims.generateFrameNumbers(AssetType.Kaboom, {
+                start: 0,
+                end: 15
+            }),
+            frameRate: 24,
+            repeat: -1
+        })
     }
 }

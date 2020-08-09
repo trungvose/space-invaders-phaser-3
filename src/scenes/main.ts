@@ -3,17 +3,19 @@ import { Bullet } from "../interface/bullet";
 import { AssetFactory } from "../interface/factory/asset-factory";
 import { AlienManager } from "../interface/manager/alien-manager";
 import { Ship } from "../interface/ship";
-import { AnimationFactory } from "../interface/factory/animation-factory";
+import { AnimationFactory, AnimationType } from "../interface/factory/animation-factory";
 
 export class MainScene extends Phaser.Scene {
     assetFactory: AssetFactory;
     animationFactory: AnimationFactory;
     bulletTime = 0;
+    starfield: Phaser.GameObjects.TileSprite;
     player: Phaser.GameObjects.Sprite;
     bullets: Phaser.Physics.Arcade.Group;
     enemyBullets: Phaser.Physics.Arcade.Group;
     alienManager: AlienManager;
-
+    cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+    fireKey: Phaser.Input.Keyboard.Key;
     constructor() {
         super({
             key: "MainScene"
@@ -40,11 +42,17 @@ export class MainScene extends Phaser.Scene {
     create() {
         this.assetFactory = new AssetFactory(this);
         this.animationFactory = new AnimationFactory(this);
-        this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.fireKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.starfield = this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.player = Ship.create(this);
         this.bullets = this.assetFactory.createBullets();
         this.enemyBullets = this.assetFactory.createEnemyBullets();
         this.alienManager = new AlienManager(this);
+    }
+
+    update() {
+        this.starfield.tilePositionY -= 1;
     }
 
     private _fireBullet() {
