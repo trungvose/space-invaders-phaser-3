@@ -28,7 +28,8 @@ export class AnimationFactory {
                 end: 15
             }),
             frameRate: 24,
-            repeat: -1
+            repeat: 0,
+            hideOnComplete: true
         })
     }
 }

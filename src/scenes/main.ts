@@ -1,20 +1,20 @@
 import { AssetType } from "../interface/assets";
 import { Bullet } from "../interface/bullet";
-import { AssetFactory } from "../interface/factory/asset-factory";
+import { AssetManager } from "../interface/manager/asset-manager";
 import { AlienManager } from "../interface/manager/alien-manager";
 import { Ship } from "../interface/ship";
 import { AnimationFactory, AnimationType } from "../interface/factory/animation-factory";
 import { Alien } from "../interface/alien";
+import { Kaboom } from "../interface/kaboom";
 
 export class MainScene extends Phaser.Scene {
-    assetFactory: AssetFactory;
+    assetManager: AssetManager;
     animationFactory: AnimationFactory;
     bulletTime = 0;
     firingTimer = 0;
     starfield: Phaser.GameObjects.TileSprite;
     player: Phaser.GameObjects.Sprite;
-    bullets: Phaser.Physics.Arcade.Group;
-    enemyBullets: Phaser.Physics.Arcade.Group;
+
     alienManager: AlienManager;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     fireKey: Phaser.Input.Keyboard.Key;
@@ -42,14 +42,12 @@ export class MainScene extends Phaser.Scene {
     }
 
     create() {
-        this.assetFactory = new AssetFactory(this);
+        this.assetManager = new AssetManager(this);
         this.animationFactory = new AnimationFactory(this);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.fireKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.starfield = this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.player = Ship.create(this);
-        this.bullets = this.assetFactory.createBullets();
-        this.enemyBullets = this.assetFactory.createEnemyBullets();
         this.alienManager = new AlienManager(this);
     }
 
@@ -76,13 +74,14 @@ export class MainScene extends Phaser.Scene {
             this._enemyFires()
         }
 
-        this.physics.overlap(this.bullets, this.alienManager.aliens, this._bulletHitAliens, null, this);
-        this.physics.overlap(this.enemyBullets, this.player, this._enemyBulletHitPlayer, null, this);
+        this.physics.overlap(this.assetManager.bullets, this.alienManager.aliens, this._bulletHitAliens, null, this);
+        this.physics.overlap(this.assetManager.enemyBullets, this.player, this._enemyBulletHitPlayer, null, this);
     }
 
     private _bulletHitAliens(bullet: Bullet, alien: Alien) {
+        let explosion: Kaboom = this.assetManager.explosions.get();
         bullet.kill();
-        alien.kill()
+        alien.kill(explosion);
     }
 
     private _enemyBulletHitPlayer() {
@@ -95,7 +94,7 @@ export class MainScene extends Phaser.Scene {
 
     private _fireBullet() {
         if (this.time.now > this.bulletTime) {
-            let bullet: Bullet = this.bullets.get();
+            let bullet: Bullet = this.assetManager.bullets.get();
             if (bullet) {
                 bullet.shoot(this.player.x, this.player.y - 18)
                 this.bulletTime = this.time.now + 200;
