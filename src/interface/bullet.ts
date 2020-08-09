@@ -6,8 +6,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     }
 
     shoot(x: number, y: number) {
-        this.setX(x);
-        this.setY(y);
+        this.setPosition(x, y);        
         this.setVelocityY(-400);
     }
 

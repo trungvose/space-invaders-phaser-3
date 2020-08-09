@@ -6,6 +6,7 @@ import { Ship } from "../interface/ship";
 import { AnimationFactory, AnimationType } from "../interface/factory/animation-factory";
 import { Alien } from "../interface/alien";
 import { Kaboom } from "../interface/kaboom";
+import { EnemyBullet } from "../interface/enemy-bullet";
 
 export class MainScene extends Phaser.Scene {
     assetManager: AssetManager;
@@ -14,7 +15,6 @@ export class MainScene extends Phaser.Scene {
     firingTimer = 0;
     starfield: Phaser.GameObjects.TileSprite;
     player: Phaser.GameObjects.Sprite;
-
     alienManager: AlienManager;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     fireKey: Phaser.Input.Keyboard.Key;
@@ -84,12 +84,21 @@ export class MainScene extends Phaser.Scene {
         alien.kill(explosion);
     }
 
-    private _enemyBulletHitPlayer() {
-
+    private _enemyBulletHitPlayer(ship, enemyBullet: EnemyBullet) {
+        let explosion: Kaboom = this.assetManager.explosions.get();
+        enemyBullet.kill();
+        explosion.setPosition(this.player.x, this.player.y);
+        explosion.play(AnimationType.Kaboom);
     }
 
     private _enemyFires() {
-
+        let enemyBullet: EnemyBullet = this.assetManager.enemyBullets.get();
+        if (enemyBullet && this.alienManager.hasAliveAliens) {
+            let randomEnemy = this.alienManager.getRandomAliveEnemy();
+            enemyBullet.setPosition(randomEnemy.x, randomEnemy.y);        
+            this.physics.moveToObject(enemyBullet, this.player, 120);
+            this.firingTimer = this.time.now + 2000;
+        }
     }
 
     private _fireBullet() {

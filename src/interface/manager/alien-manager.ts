@@ -3,6 +3,10 @@ import { AnimationType } from "../factory/animation-factory";
 
 export class AlienManager {
     aliens: Phaser.Physics.Arcade.Group;
+    get hasAliveAliens(): boolean {
+        return !!this.aliens.children.size
+    }
+
     constructor(private _scene: Phaser.Scene) {
         this.aliens = this._scene.physics.add.group({
             maxSize: 40,
@@ -10,6 +14,12 @@ export class AlienManager {
             runChildUpdate: true,
         });
         this._sortAliens();
+    }
+
+    getRandomAliveEnemy(): Alien {
+        let random = Phaser.Math.RND.integerInRange(1, this.aliens.children.size);
+        let aliens = this.aliens.children.getArray() as Alien[];
+        return aliens[random];
     }
 
     _sortAliens() {
