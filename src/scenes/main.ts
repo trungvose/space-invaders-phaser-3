@@ -53,6 +53,22 @@ export class MainScene extends Phaser.Scene {
 
     update() {
         this.starfield.tilePositionY -= 1;
+        this._shipKeyboardHandler();
+    }
+
+    private _shipKeyboardHandler() {
+        let playerBody = this.player.body as Phaser.Physics.Arcade.Body;
+        playerBody.setVelocity(0, 0);
+        if (this.cursors.left.isDown) {
+            playerBody.setVelocityX(-200);
+        }
+        else if (this.cursors.right.isDown) {
+            playerBody.setVelocityX(200);
+        }
+
+        if (this.fireKey.isDown) {
+            this._fireBullet();
+        }
     }
 
     private _fireBullet() {
