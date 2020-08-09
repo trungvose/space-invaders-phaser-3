@@ -4,11 +4,13 @@ import { AssetFactory } from "../interface/factory/asset-factory";
 import { AlienManager } from "../interface/manager/alien-manager";
 import { Ship } from "../interface/ship";
 import { AnimationFactory, AnimationType } from "../interface/factory/animation-factory";
+import { Alien } from "../interface/alien";
 
 export class MainScene extends Phaser.Scene {
     assetFactory: AssetFactory;
     animationFactory: AnimationFactory;
     bulletTime = 0;
+    firingTimer = 0;
     starfield: Phaser.GameObjects.TileSprite;
     player: Phaser.GameObjects.Sprite;
     bullets: Phaser.Physics.Arcade.Group;
@@ -69,6 +71,26 @@ export class MainScene extends Phaser.Scene {
         if (this.fireKey.isDown) {
             this._fireBullet();
         }
+
+        if (this.time.now > this.firingTimer) {
+            this._enemyFires()
+        }
+
+        this.physics.overlap(this.bullets, this.alienManager.aliens, this._bulletHitAliens, null, this);
+        this.physics.overlap(this.enemyBullets, this.player, this._enemyBulletHitPlayer, null, this);
+    }
+
+    private _bulletHitAliens(bullet: Bullet, alien: Alien) {
+        bullet.kill();
+        alien.kill()
+    }
+
+    private _enemyBulletHitPlayer() {
+
+    }
+
+    private _enemyFires() {
+
     }
 
     private _fireBullet() {

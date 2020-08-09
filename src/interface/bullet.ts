@@ -10,5 +10,9 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.setY(y);
         this.setVelocityY(-400);
     }
+
+    kill() {
+        this.destroy();
+    }
 }
 
