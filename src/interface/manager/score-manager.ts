@@ -5,6 +5,11 @@ export class ScoreManager {
   line1Text: Phaser.GameObjects.Text;
   line2Text: Phaser.GameObjects.Text;
   lives: Phaser.Physics.Arcade.Group;
+
+  get noMoreLives() {
+    return this.lives.countActive(true) === 0;
+  }
+
   highScore = 0;
   score = 0;
 
@@ -33,21 +38,30 @@ export class ScoreManager {
     this.scoreText = this._scene.add.text(22, 32, "", normalTextConfig);
     this.line1Text = this._scene.add
       .text(SIZE_X / 2, 320, "", bigTextConfig)
-      .setOrigin(0.5)
+      .setOrigin(0.5);
 
     this.line2Text = this._scene.add
       .text(SIZE_X / 2, 400, "", bigTextConfig)
-      .setOrigin(0.5)
+      .setOrigin(0.5);
 
-    this._setLives(SIZE_X, normalTextConfig);
+    this._setLivesText(SIZE_X, normalTextConfig);
   }
 
-  private _setLives(
+  private _setLivesText(
     SIZE_X: number,
     textConfig: { fontSize: string; fontFamily: string; fill: string }
   ) {
     this._scene.add.text(SIZE_X - 100, 16, `LIVES`, textConfig);
-    this.lives = this._scene.physics.add.group();
+    this.lives = this._scene.physics.add.group({
+      maxSize: 3,
+      runChildUpdate: true,
+    });
+    this.resetLives();
+  }
+
+  resetLives() {
+    let SIZE_X = this._scene.game.canvas.width;
+    this.lives.clear(true, true)
     for (let i = 0; i < 3; i++) {
       let ship: Phaser.GameObjects.Sprite = this.lives.create(
         SIZE_X - 100 + 30 * i,
@@ -61,11 +75,15 @@ export class ScoreManager {
   }
 
   setWinText() {
-    this._setBigText("YOU WON!", "PRESS ANY KEY FOR NEW GAME");
+    this._setBigText("YOU WON!", "PRESS SPACE FOR NEW GAME");
   }
 
   setGameOverText() {
-    this._setBigText("GAME OVER", "PRESS ANY KEY FOR NEW GAME");
+    this._setBigText("GAME OVER", "PRESS SPACE FOR NEW GAME");
+  }
+
+  hideText() {
+    this._setBigText("", "")
   }
 
   private _setBigText(line1: string, line2: string) {

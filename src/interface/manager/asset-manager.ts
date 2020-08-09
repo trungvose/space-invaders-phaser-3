@@ -13,6 +13,16 @@ export class AssetManager {
         this.explosions = this._createExplosions();
     }
 
+    gameOver() {
+        this.enemyBullets.clear(true, true)
+        this.bullets.clear(true, true)
+    }
+
+    reset() {
+        this._createEnemyBullets();
+        this._createBullets();
+    }
+
     private _createEnemyBullets(): Phaser.Physics.Arcade.Group {
         let enemyBullets = this._scene.physics.add.group({
             max: 0,

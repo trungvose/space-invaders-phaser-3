@@ -22,9 +22,14 @@ export class AlienManager {
         return aliens[random];
     }
 
+    reset() {
+        this._sortAliens();
+    }
+
     private _sortAliens() {
         let ORIGIN_X = 100;
         let ORIGIN_Y = 100;
+        this.aliens.clear(true, true);
         for (let y = 0; y < 4; y++) {
             for (let x = 0; x < 10; x++) {
                 let alien: Alien = this.aliens.create(ORIGIN_X + x * 48, ORIGIN_Y + y * 50);
