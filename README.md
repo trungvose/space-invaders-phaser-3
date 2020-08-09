@@ -29,9 +29,10 @@ The below table listed all of the awesome resources that I have reference to
 | Command                                                                 | Description                                                                                                                                              |
 | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [@photonstorm/phaser3-typescript-project-template][typescript-template] | A quick-start project template combines Phaser 3 with [TypeScript](https://www.typescriptlang.org/) and uses [Rollup](https://rollupjs.org) for bundling |
-| [Invaders Game - Phaser 2][phaser2-invaders]                            | Official tutorial to build Invaders game with Phaser 2 . I converted the code to Phaser 3 and reused its static resources                                |
+| [Making your first Phaser 3 game][first-phaser-3-game]                  | Official guide to create a small game involving a player running and jumping around platforms, collecting stars and avoiding baddies                     |
+| [Invaders Game - Phaser 2][phaser2-invaders]                            | Official tutorial to build Invaders game with Phaser 2 . I reused its static resources but converting the code to Phaser 3                               |
 | [Phaser 3 API References][phaser-api]                                   | All of the API that you can reference to while working with Phaser 3                                                                                     |
-| [Phaser 3 and TypeScript Tutorial][build-a-simple-game]                 | How to build a simple game in the browser with Phaser 3 and TypeScript                                                                                   |  |
+| [Phaser 3 and TypeScript Tutorial][build-a-simple-game]                 | How to build a simple game in the browser with Phaser 3 and TypeScript                                                                                   |
 
 ## Upcoming
 
@@ -46,3 +47,4 @@ If you would like to collaborate, tag me on Twitter 👏👏👏
 [phaser2-invaders]: https://phaser.io/examples/v2/games/invaders
 [phaser-api]: https://photonstorm.github.io/phaser3-docs/
 [build-a-simple-game]: https://www.freecodecamp.org/news/how-to-build-a-simple-game-in-the-browser-with-phaser-3-and-typescript-bdc94719135/
+[first-phaser-3-game]: https://phaser.io/tutorials/making-your-first-phaser-3-game/part1

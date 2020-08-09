@@ -1,8 +1,8 @@
 export enum AssetType {
-    Bullet = "Bullet",
-    EnemyBullet = "EnemyBullet",
-    Alien = "Alien",
-    Ship = "Ship",
-    Kaboom = "Kaboom",
-    Starfield = "Starfield",
+    Bullet = "bullet",
+    EnemyBullet = "enemyBullet",
+    Alien = "alien",
+    Ship = "ship",
+    Kaboom = "kaboom",
+    Starfield = "starfield",
 }

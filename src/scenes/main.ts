@@ -32,7 +32,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.tileSprite(400, 300, 800, 600, AssetType.Starfield);
+        this.add.tileSprite(0, 0, 800, 600, AssetType.Starfield).setOrigin(0, 0);
         this.player = Ship.create(this);
         this.bullets = this.physics.add.group({
             maxSize: 30,
