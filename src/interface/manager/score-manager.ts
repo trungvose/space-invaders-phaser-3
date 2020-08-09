@@ -2,8 +2,8 @@ import { AssetType } from "../assets";
 
 export class ScoreManager {
   scoreText: Phaser.GameObjects.Text;
-  gameOverText: Phaser.GameObjects.Text;
-  beginText: Phaser.GameObjects.Text;
+  line1Text: Phaser.GameObjects.Text;
+  line2Text: Phaser.GameObjects.Text;
   lives: Phaser.Physics.Arcade.Group;
   highScore = 0;
   score = 0;
@@ -26,20 +26,18 @@ export class ScoreManager {
 
     const bigTextConfig = {
       ...textConfig,
-      fontSize: "44px",
+      fontSize: "36px",
     };
 
     this._scene.add.text(16, 16, `SCORE`, normalTextConfig);
     this.scoreText = this._scene.add.text(22, 32, "", normalTextConfig);
-    this.gameOverText = this._scene.add
-      .text(SIZE_X / 2, 320, "GAME OVER", bigTextConfig)
+    this.line1Text = this._scene.add
+      .text(SIZE_X / 2, 320, "", bigTextConfig)
       .setOrigin(0.5)
-      .setVisible(false);
-      
-    this.beginText = this._scene.add
-      .text(SIZE_X / 2, 400, "PRESS ANY KEY FOR NEW GAME", bigTextConfig)
+
+    this.line2Text = this._scene.add
+      .text(SIZE_X / 2, 400, "", bigTextConfig)
       .setOrigin(0.5)
-      .setVisible(false);
 
     this._setLives(SIZE_X, normalTextConfig);
   }
@@ -60,6 +58,19 @@ export class ScoreManager {
       ship.setAngle(90);
       ship.setAlpha(0.6);
     }
+  }
+
+  setWinText() {
+    this._setBigText("YOU WON!", "PRESS ANY KEY FOR NEW GAME");
+  }
+
+  setGameOverText() {
+    this._setBigText("GAME OVER", "PRESS ANY KEY FOR NEW GAME");
+  }
+
+  private _setBigText(line1: string, line2: string) {
+    this.line1Text.setText(line1);
+    this.line2Text.setText(line2);
   }
 
   setHighScore() {

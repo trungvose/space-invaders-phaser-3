@@ -87,6 +87,7 @@ export class MainScene extends Phaser.Scene {
         this.scoreManager.increaseScore();
         if(!this.alienManager.hasAliveAliens){
             this.scoreManager.increaseScore(1000);
+            this.scoreManager.setWinText();
         }
     }
 
