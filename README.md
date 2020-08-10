@@ -50,7 +50,7 @@ Thanks a bunch for stopping by and supporting me!
 
 ## Time Spending
 
-I only spent a couple of hours on one weekend to read the documentation and migrate the source code to Phaser 3. Based on the report, 8 hours was the total time spending.
+I only spent a couple of hours on one weekend to read the documentation and migrate the source code to Phaser 3. Based on the report, 8 hours was the total time spending. Monday, August 10 is a public holiday in Singapore so I have the right to finalize and publish the game 😎
 
 ![Space Invaders built with Phaser 3 and TypeScript][time-spending]
 
