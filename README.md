@@ -126,3 +126,5 @@ Feel free to use my code on your project. It would be great if you put a referen
 [freecodecamp]: https://www.freecodecamp.org/news/how-to-build-a-simple-game-in-the-browser-with-phaser-3-and-typescript-bdc94719135/
 [first-phaser-3-game]: https://phaser.io/tutorials/making-your-first-phaser-3-game/part1
 [sounds]: https://www.classicgaming.cc/classics/space-invaders/sounds
+[issues]: https://github.com/trungk18/space-invaders-phaser-3/issues/new
+[pull]: https://github.com/trungk18/space-invaders-phaser-3/compare
