@@ -10,7 +10,8 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: MainScene,
     physics: {
         default: "arcade"
-    }
+    },
+    parent: "SpaceInvaders"
 };
 
 class SpaceInvadersGame extends Phaser.Game {
