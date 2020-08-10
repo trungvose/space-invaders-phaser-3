@@ -11,6 +11,15 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  min-width: 800px;
+}
+
+#SpaceInvaders {
+  min-height: 300px;
+}
+
+#SpaceInvaders canvas {
+  z-index: 2;
 }
 
 .social-wrapper {
@@ -60,4 +69,141 @@ body {
   );
   background-image: linear-gradient(to bottom, #eee 0, #ddd 100%);
   border-color: #ccc;
+}
+
+/* To modify the animation, change either @primaryClr or @ballSize for a different color and a different size. */
+/* LESS Vars */
+/*The Pacman*/
+.pacman {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  z-index: -1;
+}
+.pacman > div:nth-child(1),
+.pacman > div:nth-child(2) {
+  width: 0;
+  height: 0;
+  border: 37.5px solid #fed75a;
+  border-right-color: transparent;
+  border-radius: 50%;
+  left: -60px;
+  -webkit-animation: rotate_pacman_half_up 0.5s infinite;
+          animation: rotate_pacman_half_up 0.5s infinite;
+  position: relative;
+}
+.pacman > div:nth-child(2) {
+  -webkit-animation-name: rotate_pacman_half_down;
+          animation-name: rotate_pacman_half_down;
+  margin-top: -75px;
+}
+.pacman > div:nth-child(3),
+.pacman > div:nth-child(4),
+.pacman > div:nth-child(5) {
+  -webkit-animation: pacman-balls 1s infinite linear;
+          animation: pacman-balls 1s infinite linear;
+  background-color: #fed75a;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 30px;
+  left: 75px;
+}
+.pacman > div:nth-child(3) {
+  -webkit-animation-delay: -0.66s;
+          animation-delay: -0.66s;
+}
+.pacman > div:nth-child(4) {
+  -webkit-animation-delay: -0.33s;
+          animation-delay: -0.33s;
+}
+/*Pacman Animation Keyframes*/
+@-webkit-keyframes rotate_pacman_half_up {
+  0% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+@keyframes rotate_pacman_half_up {
+  0% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+@-webkit-keyframes rotate_pacman_half_down {
+  0% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+@keyframes rotate_pacman_half_down {
+  0% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+@-webkit-keyframes pacman-balls {
+  75% {
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: translateX(-93.75px);
+            transform: translateX(-93.75px);
+  }
+}
+@keyframes pacman-balls {
+  75% {
+    opacity: 0.7;
+  }
+  100% {
+    -webkit-transform: translateX(-93.75px);
+            transform: translateX(-93.75px);
+  }
+}
+/*Scaffolding*/
+body,
+html {
+  height: 100%;
+}
+body {
+  background-color: rgba(0, 0, 0, 0.87);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
 }
