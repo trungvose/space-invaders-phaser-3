@@ -9,6 +9,7 @@
 - [Space Invaders built with Phaser 3 and TypeScript](#space-invaders-built-with-phaser-3-and-typescript)
   - [Working Game](#working-game)
   - [Why?](#why)
+  - [Support](#support)
   - [Time Spending](#time-spending)
   - [Available Commands](#available-commands)
   - [Configuring Rollup](#configuring-rollup)
@@ -35,6 +36,15 @@ I got a lot of motivation to work on some JS game after finishing [Angular Tetri
 Phaser is one of the most famous ones. I spent only about an hour to walk through the [official tutorial][first-phaser-3-game] to build the first game. The experience was awesome and I started to look at their example. There were several examples only for Phaser 2 and one of them is [Invaders][phaser2-invaders]. I really like how the game look and I decide to spend time going through the source code and migrate it over to Phaser 3 with TypeScript.
 
 In the end, what you are seeing is the result of that process. I did add some sound effects and make some changes to the UI. With only a few hundred lines of code, you could build a catchy looking game with Phaser 3. How cool is that?
+
+## Support
+
+If you like my work, feel free to:
+
+- ⭐ this repository. And we will be happy together :)
+- <a title="Thanks for your support!" href="https://www.buymeacoffee.com/tuantrungvo" target="_blank"><img src="https://res.cloudinary.com/dvujyxh7e/image/upload/c_thumb,w_140,g_face/v1596378474/default-orange_uthxgz.jpg" alt="Buy Me A Coffee"></a>
+
+Thanks a bunch for stopping by and supporting me!
 
 ## Time Spending
 
