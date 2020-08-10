@@ -1,5 +1,7 @@
 # Space Invaders built with Phaser 3 and TypeScript
 
+Another Space Invaders game 😂😂😂
+
 > It was based on [Phaser 2 Invader official tutorial][phaser2-invaders] but written in Phaser 3 and TypeScript. There were quite a lot of changes between Phaser 2 and 3 but I like version 3 better. It made the code much more readable and structure.
 
 <details>
@@ -75,7 +77,7 @@ Note that due to the build process involved, it can take around 20 seconds to bu
 ## Author: Trung Vo ✍️
 
 - A young and passionate front-end engineer. Working with Angular and TypeScript. Like photography, running, cooking, and reading books.
-- Author of Angular Jira clone -> [jira.trungk18.com][jira-clone] and Angular Tetris [tetris.trungk18.com][tetris]
+- Author of [Angular Jira clone][jira-clone] and [Angular Tetris][tetris]
 - Personal blog: https://trungk18.com/
 - Say hello: trungk18 [et] gmail [dot] com
 
@@ -99,7 +101,7 @@ I am having some ideas to start building some of my favorite games (and easy to 
 - Enhance the [Angular Tetris][tetris] with a few more games: racing, tank shotting.
 - Duck Hunt
 
-If you would like to collaborate, tag me on Twitter 👏👏👏
+If you would like to collaborate, tag [@tuantrungvo][twitter] on Twitter 👏👏👏
 
 ## Contributing
 
@@ -113,9 +115,11 @@ Feel free to use my code on your project. It would be great if you put a referen
 
 [MIT](https://opensource.org/licenses/MIT)
 
+[twitter]: https://twitter.com/tuantrungvo
 [time-spending]: dist/assets/readme/time-spending.png
 [demo]: dist/assets/readme/invaders-demo.gif
 [tetris]: https://tetris.trungk18.com/
+[jira-clone]: https://jira.trungk18.com/
 [typescript-template]: https://github.com/photonstorm/phaser3-typescript-project-template
 [phaser2-invaders]: https://phaser.io/examples/v2/games/invaders
 [phaser-api]: https://photonstorm.github.io/phaser3-docs/
