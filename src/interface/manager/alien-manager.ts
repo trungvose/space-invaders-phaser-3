@@ -13,7 +13,9 @@ export class AlienManager {
             classType: Alien,
             runChildUpdate: true
         });
+        this.aliens.setOrigin(0, 0)
         this._sortAliens();
+        this.animate();
     }
 
     getRandomAliveEnemy(): Alien {
@@ -38,21 +40,20 @@ export class AlienManager {
                 alien.setImmovable(false);
             }
         }
-        let tween = this._scene.tweens.add({
-            targets: this.aliens,
-            props: {
-                x: 200
-            },
-            duration: 2000,
-            ease: "Linear",
-            paused: false,
-            delay: 0,
-            repeat: 1000,
-            yoyo: true,
-            onLoop: () => {
+    }
 
-            }
-        });
-        tween.play()
+    private animate() {
+        this.aliens.children.iterate((c: Alien) => {
+            this._scene.tweens.add({
+                targets: c,
+                ease: "Linear",
+                duration: 2000,
+                x: "+=200",
+                paused: false,
+                delay: 0,
+                yoyo: true,
+                repeat: -1
+            })
+        })
     }
 }

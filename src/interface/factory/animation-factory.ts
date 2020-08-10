@@ -7,10 +7,10 @@ export enum AnimationType {
 
 export class AnimationFactory {
     constructor(private _scene: Phaser.Scene) {
-        this.init();
+        this._init();
     }
 
-    init() {
+    private _init() {
         this._scene.anims.create({
             key: AnimationType.Fly,
             frames: this._scene.anims.generateFrameNumbers(AssetType.Alien, {
