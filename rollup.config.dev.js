@@ -29,7 +29,7 @@ export default {
         replace({
             'typeof CANVAS_RENDERER': JSON.stringify(true),
             'typeof WEBGL_RENDERER': JSON.stringify(true),
-            'typeof EXPERIMENTAL': JSON.stringify(true),
+            'typeof EXPERIMENTAL': JSON.stringify(false),
             'typeof PLUGIN_CAMERA3D': JSON.stringify(false),
             'typeof PLUGIN_FBINSTANT': JSON.stringify(false),
             'typeof FEATURE_SOUND': JSON.stringify(true)

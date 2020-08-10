@@ -4,7 +4,7 @@ import { MainScene } from './scenes/main';
 const config: Phaser.Types.Core.GameConfig = {
     title: "Space Invaders",
     type: Phaser.AUTO,
-    backgroundColor: '#125555',
+    backgroundColor: 'rgb(47, 52, 55)',
     width: 800,
     height: 600,
     scene: MainScene,
