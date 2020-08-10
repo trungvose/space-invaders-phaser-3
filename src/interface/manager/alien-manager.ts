@@ -15,7 +15,7 @@ export class AlienManager {
         });
         this.aliens.setOrigin(0, 0)
         this._sortAliens();
-        this.animate();
+        this._animate();
     }
 
     getRandomAliveEnemy(): Alien {
@@ -26,6 +26,7 @@ export class AlienManager {
 
     reset() {
         this._sortAliens();
+        this._animate();
     }
 
     private _sortAliens() {
@@ -42,7 +43,7 @@ export class AlienManager {
         }
     }
 
-    private animate() {
+    private _animate() {
         this.aliens.children.iterate((c: Alien) => {
             this._scene.tweens.add({
                 targets: c,
